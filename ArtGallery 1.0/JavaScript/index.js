@@ -33,26 +33,38 @@ const prevButton = document.getElementById("prevButton");
 const nextButton = document.getElementById("nextButton");
 const grupoImagens = document.querySelector(".Grupo_Imagens");
 const imagens = document.querySelectorAll(".Imagens");
-const numImages = imagens.length;
 let currentIndex = 0;
 
-prevButton.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + numImages) % numImages;
-    scrollGallery();
-});
-
-nextButton.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1 + numImages) % numImages;
-    scrollGallery();
-});
+function updateImageWidth() {
+    const numImages = imagens.length;
+    const imageWidth = grupoImagens.clientWidth / numImages;
+    return imageWidth;
+}
 
 function scrollGallery() {
-    const imageWidth = grupoImagens.clientWidth / numImages;
+    const imageWidth = updateImageWidth();
     grupoImagens.style.transition = "transform 0.5s ease-in-out";
     grupoImagens.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
 }
 
+function handleResize() {
+    window.addEventListener("resize", () => {
+        scrollGallery();
+    });
+}
+
+prevButton.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + imagens.length) % imagens.length;
+    scrollGallery();
+});
+
+nextButton.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % imagens.length;
+    scrollGallery();
+});
+
 scrollGallery();
+handleResize();
 
 /*Surrealimo*/
 
