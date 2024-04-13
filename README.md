@@ -1,1 +1,1 @@
-Link para o site: https://art-gallery-01800.netlify.app
+Link para o site: https://artgalleryv1.netlify.app/
